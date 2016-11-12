@@ -1,0 +1,15 @@
+application/cache/*
+application/cache_query/*
+!application/cache/index.html
+!application/cache/.htaccess
+!application/cache_query/index.html
+!application/cache_query/.htaccess
+
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
+
+application/config/config.php
+application/config/database.php
+
+uploads/*
