@@ -232,33 +232,27 @@ class T_document extends CI_Controller
 
     public function cek($id=null) 
     {
-        $data = array(
-            'button' => 'Create',
-            'action' => site_url('t_document/form_action'),
-            'id' => '',
-            'document_id' => '',
-            'customer_id' => '',
-            'quantity' => '',
-        );
-        if (!empty($id)) {
-            $row = $this->T_document_model->get($id);
+        $data['cust'] = $this->M_customer_model->get($id);
+        $data['tdoc'] = $this->M_dokument_model->get_all();
+        $this->template->load('template','t_document/v_t_document_form2', $data);
+    }
 
-            if ($row) {
-                $data = array(
-                    'button' => 'Update',
-                    'action' => site_url('t_document/form_action'),
-                    'id'     => $id,
-                    'document_id' => $row->document_id,
-                    'customer_id' => $row->customer_id,
-                    'quantity' => $row->quantity,
-                );
-                  
+    public function cek_action()
+    {
+        $customer_id = $this->input->post('customer_id');
+        $dok         = $this->input->post('dok');
+        foreach ($dok as $key => $value) {
+            $data = array('document_id' => $key, 'customer_id' => $customer_id);
+            if ($this->T_document_model->get($data)) {
             } else {
-                $this->session->set_flashdata('message', 'Record Not Found');
+                $this->T_document_model->insert($data);
             }
         }
-        
-        $this->template->load('template','t_document/v_t_document_form2', $data);
+        $res['success'] = true;
+        $res['message'] = 'Simpan berhasil';
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($res));
+
     }
 
 
