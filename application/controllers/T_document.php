@@ -89,6 +89,7 @@ class T_document extends CI_Controller
         }
     }
 
+
     public function form($id=null) 
     {
         if (empty($id)) {
@@ -228,6 +229,38 @@ class T_document extends CI_Controller
         xlsEOF();
         exit();
     }
+
+    public function cek($id=null) 
+    {
+        $data = array(
+            'button' => 'Create',
+            'action' => site_url('t_document/form_action'),
+            'id' => '',
+            'document_id' => '',
+            'customer_id' => '',
+            'quantity' => '',
+        );
+        if (!empty($id)) {
+            $row = $this->T_document_model->get($id);
+
+            if ($row) {
+                $data = array(
+                    'button' => 'Update',
+                    'action' => site_url('t_document/form_action'),
+                    'id'     => $id,
+                    'document_id' => $row->document_id,
+                    'customer_id' => $row->customer_id,
+                    'quantity' => $row->quantity,
+                );
+                  
+            } else {
+                $this->session->set_flashdata('message', 'Record Not Found');
+            }
+        }
+        
+        $this->template->load('template','t_document/v_t_document_form2', $data);
+    }
+
 
 }
 
