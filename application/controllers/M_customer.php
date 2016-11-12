@@ -50,6 +50,7 @@ class M_customer extends CI_Controller
                 $view    = anchor(site_url('m_customer/read/'.$d->customer_id),'<i class="fa fa-eye fa-lg"></i>',array('title'=>'detail','class'=>'btn btn-outline btn-icon-only green'));
                 $edit    = anchor(site_url('m_customer/form/'.$d->customer_id),'<i class="fa fa-pencil-square-o fa-lg"></i>',array('title'=>'edit','class'=>'btn btn-outline btn-icon-only blue'));
                 $delete  = anchor(site_url('m_customer/delete/'.$d->customer_id),'<i class="fa fa-trash-o fa-lg"></i>',array('title'=>'delete','class'=>'btn btn-outline btn-icon-only red', 'data-toggle'=>'confirm', 'data-title'=>$d->{$this->M_customer_model->label}));
+                $dokumen = anchor(site_url('t_document/form/'.$d->customer_id),'<i class="fa fa-list fa-lg"></i>',array('title'=>'delete','class'=>'btn btn-outline btn-icon-only green'));
 
                 $records["data"][] = array(
                     $checkbok,
@@ -69,7 +70,7 @@ class M_customer extends CI_Controller
 					$d->propinsi_id, 
 					@$d->m_periode->{$this->M_periode_model->label}, 
 					@$d->m_sales->{$this->M_sales_model->label}, 
-                    $view.$edit.$delete
+                    $view.$edit.$delete.$dokumen.@$bayar
                 );
             }
         }
