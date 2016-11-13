@@ -100,7 +100,7 @@ class M_dokument extends CI_Controller
                 $data = array(
                     'button' => 'Update',
                     'action' => site_url('m_dokument/form_action'),
-                    'id'     => $id,
+                    'document_id'     => $id,
 					'document_name' => $row->document_name,
 					'document_quantity' => $row->document_quantity,
 				);

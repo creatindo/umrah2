@@ -109,7 +109,7 @@ class M_sales extends CI_Controller
                 $data = array(
                     'button' => 'Update',
                     'action' => site_url('m_sales/form_action'),
-                    'id'     => $id,
+                    'sales_id'     => $id,
 					'sales_name' => $row->sales_name,
 					'sales_telp' => $row->sales_telp,
 					'sales_address' => $row->sales_address,

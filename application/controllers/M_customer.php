@@ -144,7 +144,7 @@ class M_customer extends CI_Controller
                 $data = array(
                     'button' => 'Update',
                     'action' => site_url('m_customer/form_action'),
-                    'id'     => $id,
+                    'customer_id'     => $id,
 					'customer_name' => $row->customer_name,
 					'customer_address' => $row->customer_address,
 					'mother_name' => $row->mother_name,
