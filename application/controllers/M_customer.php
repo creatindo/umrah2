@@ -81,6 +81,7 @@ class M_customer extends CI_Controller
         $this->output->set_content_type('application/json')->set_output(json_encode($records));
     }
 
+
     public function read($id) 
     {
         $row = $this->M_customer_model
