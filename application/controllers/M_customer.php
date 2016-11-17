@@ -50,11 +50,13 @@ class M_customer extends CI_Controller
                 $view    = anchor(site_url('m_customer/read/'.$d->customer_id),'<i class="fa fa-eye fa-lg"></i>',array('title'=>'detail','class'=>'btn btn-outline btn-icon-only green'));
                 $edit    = anchor(site_url('m_customer/form/'.$d->customer_id),'<i class="fa fa-pencil-square-o fa-lg"></i>',array('title'=>'edit','class'=>'btn btn-outline btn-icon-only blue'));
                 $delete  = anchor(site_url('m_customer/delete/'.$d->customer_id),'<i class="fa fa-trash-o fa-lg"></i>',array('title'=>'delete','class'=>'btn btn-outline btn-icon-only red', 'data-toggle'=>'confirm', 'data-title'=>$d->{$this->M_customer_model->label}));
-                $dokumen = anchor(site_url('t_document/cek/'.$d->customer_id),'<i class="fa fa-list fa-lg"></i>',array('title'=>'dokumen','class'=>'btn btn-outline btn-icon-only green'));
+                $dokumen = anchor(site_url('t_document/cek/'.$d->customer_id),'<i class="fa fa-list fa-lg"></i>',array('title'=>'dokumen','class'=>'btn  btn-icon-only blue'));
+                $payment = anchor(site_url('t_payment/cek/'.$d->customer_id),'<i class="fa fa-dollar fa-lg"></i>',array('title'=>'bayar','class'=>'btn  btn-icon-only green'));
 
                 $records["data"][] = array(
                     $checkbok,
                 
+                    $view.$edit.$delete.$dokumen.$payment,
 					$d->customer_name, 
 					$d->customer_address, 
 					$d->mother_name, 
@@ -69,8 +71,7 @@ class M_customer extends CI_Controller
 					$d->kecamatan_id, 
 					$d->propinsi_id, 
 					@$d->m_periode->{$this->M_periode_model->label}, 
-					@$d->m_sales->{$this->M_sales_model->label}, 
-                    $view.$edit.$delete.$dokumen.@$bayar
+					@$d->m_sales->{$this->M_sales_model->label}
                 );
             }
         }

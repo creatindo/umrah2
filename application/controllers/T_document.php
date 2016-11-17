@@ -241,11 +241,26 @@ class T_document extends CI_Controller
     {
         $customer_id = $this->input->post('customer_id');
         $dok         = $this->input->post('dok');
-        foreach ($dok as $key => $value) {
-            $data = array('document_id' => $key, 'customer_id' => $customer_id);
-            if ($this->T_document_model->get($data)) {
-            } else {
-                $this->T_document_model->insert($data);
+        $q           = $this->input->post('q');
+
+        $tdok = $this->M_dokument_model->get_all();
+
+        if ($dok) {
+            foreach ($tdok as $key) {
+                if (in_array($key->document_id, $dok)) {
+                    $data = array('document_id' => $key->document_id, 'customer_id' => $customer_id);
+                    if ($d = $this->T_document_model->get($data)) {
+                        $this->T_document_model->update(array('status' => 1, 'quantity' => $q[$key->document_id]), $d->id);
+                    } else {
+                        $data['quantity'] = $q[$key->document_id]; 
+                        $this->T_document_model->insert($data);
+                    }
+                }else{
+                    $data = array('document_id' => $key->document_id, 'customer_id' => $customer_id);
+                    if ($d = $this->T_document_model->get($data)) {
+                        $this->T_document_model->update(array('status' => 0,  'quantity' => $q[$key->document_id]), $d->id);
+                    }
+                }
             }
         }
         $res['success'] = true;

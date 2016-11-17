@@ -42,6 +42,7 @@
                 <tr role="row" class="heading">
                     <th width="2%"><input type="checkbox" class="group-checkable"> </th>
                     
+                    <th width="2%">Action</th>
                     <th>Customer Name</th>
                     <th>Customer Address</th>
                     <th>Mother Name</th>
@@ -52,16 +53,23 @@
                     <th>Customer Passport No</th>
                     <th>Customer Passport Date</th>
                     <th>Customer Img</th>
-                    <th>Kota Id</th>
-                    <th>Kecamatan Id</th>
-                    <th>Propinsi Id</th>
-                    <th>Periode Id</th>
-                    <th>Sales Id</th>
-                    <th width="2%">Action</th>
+                    <th>Kota</th>
+                    <th>Kecamatan</th>
+                    <th>Propinsi</th>
+                    <th>Periode</th>
+                    <th>Sales</th>
                 </tr>
                 <tr role="row" class="filter">
                     <td></td>
                     
+                    <td>
+                        <div class="margin-bottom-5">
+                            <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
+                            <i class="fa fa-search"></i> Search</button>
+                        </div>
+                        <button class="btn btn-sm red btn-outline filter-cancel">
+                        <i class="fa fa-times"></i> Reset</button>
+                    </td>
                     <td><input type="text" class="form-control form-filter input-sm" name="customer_name"></td>
                     <td><input type="text" class="form-control form-filter input-sm" name="customer_address"></td>
                     <td><input type="text" class="form-control form-filter input-sm" name="mother_name"></td>
@@ -97,14 +105,6 @@
                           );
                       $this->load->view('form/v_dropdown_ajax', array('ddajax' => $ddajax ), FALSE);
                     ?>
-                    </td>
-                    <td>
-                        <div class="margin-bottom-5">
-                            <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                            <i class="fa fa-search"></i> Search</button>
-                        </div>
-                        <button class="btn btn-sm red btn-outline filter-cancel">
-                        <i class="fa fa-times"></i> Reset</button>
                     </td>
                 </tr>
             </thead>

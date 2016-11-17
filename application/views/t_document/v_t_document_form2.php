@@ -6,16 +6,14 @@
       <div class='portlet light'>
         <div class='portlet-title'>
           <div class='caption font-green'>
-            <span class='caption-subject bold uppercase'>Form T DOCUMENT </span>
+            <span class='caption-subject uppercase'>
+              <h2><?php echo $cust->customer_name ?><small style="font-size: 12px"><i>Customer Name</i> </small></h2>
+            </span>
           </div>
         </div>
         <div class='portlet-body form'>
           <div class='row'>
-            <div class='col-md-12'>
-              <h2><?php echo $cust->customer_name ?><small style="font-size: 12px"><i>Customer Name</i> </small></h2>
-            </div>
-
-            <form action="<?php echo site_url('t_document/cek_action') ?>" method="post" id="input_form" class="">
+            <form action="<?php echo site_url('t_document/cek_action') ?>" method="post" id="input_form" class="form-horizontal">
 
               <?php foreach ($tdoc as $doc): ?>
                 <div class='col-md-12'>
@@ -23,16 +21,21 @@
                     <label class='col-md-3 control-label'><?php echo $doc->document_name ?>
                       <span class="badge badge-primary"><?php echo $doc->document_quantity ?></span>
                     </label>
-                    <div class='col-md-9'>
+                    <div class='col-md-2'>
                       <?php 
-                        $data = array('document_id' => $doc->document_id, 'customer_id' => $cust->customer_id);
-                        if ($this->T_document_model->get($data)) {
-                          $cek = 'checked';
-                        } else {
-                          $cek = '';
-                        }
-                       ?>
-                      <input type="checkbox" <?php echo $cek ?> class="form-control mask-number" name="dok[<?php echo $doc->document_id ?>]" value="<?php echo $doc->document_id ?>" />
+                        $data = array('document_id' => $doc->document_id, 'customer_id' => $cust->customer_id, 'status' => 1);
+                        $cek = ($this->T_document_model->get($data)) ? 'checked' : '' ;
+                        
+                        $data2 = array('document_id' => $doc->document_id, 'customer_id' => $cust->customer_id );
+                        $d = $this->T_document_model->get($data2);
+                        $nilai = ($d) ? $d->quantity : '' ;
+                      ?>
+                      <div class="input-group">
+                        <span class="input-group-addon">
+                          <input type="checkbox" <?php echo $cek ?> class="form-control " name="dok[<?php echo $doc->document_id ?>]" value="<?php echo $doc->document_id ?>" />
+                        </span>
+                        <input type="text" class="form-control mask-number" name="q[<?php echo $doc->document_id ?>]" value="<?php echo $nilai ?>">
+                      </div>
                     </div>
                   </div>
                 </div>

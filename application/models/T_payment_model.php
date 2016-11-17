@@ -7,6 +7,7 @@ class T_payment_model extends MY_Model
 {
 
     public $table = 't_payment';
+    public $view = 'v_payment';
     public $primary_key = 'id';
     public $label = 'id';
     public $fillable = array(); // If you want, you can set an array with the fields that can be filled by insert/update
@@ -60,6 +61,12 @@ class T_payment_model extends MY_Model
                             ->with_m_customer()
                             ->get_all();
         return $result;
+    }
+
+    public function _get($customer_id='')
+    {
+        $this->table = $this->view;
+        return $this->where('customer_id', $customer_id)->get();
     }
 
 }

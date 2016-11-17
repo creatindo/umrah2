@@ -243,6 +243,38 @@ class T_payment extends CI_Controller
         exit();
     }
 
+    public function cek($id=null) 
+    {
+        $data['cust']    = $this->M_customer_model->get($id);
+        $data['payment'] = $this->T_payment_model->_get($id);
+        $this->template->load('template','t_payment/v_t_payment_form2', $data);
+    }
+
+     public function cek_action()
+    {
+        $res['success'] = false;
+        $res['message'] = 'Terjadi Kesalahan';
+
+        $customer_id   = $this->input->post('customer_id');
+        $dok           = $this->input->post('dok');
+        $payment_value = $this->input->post('payment_value');
+
+        $data = array(
+            'payment_value' => str_replace('.','',$payment_value),
+            'customer_id' => $customer_id,
+        );
+
+        if ($this->T_payment_model->insert($data))
+        {
+            $res['success'] = true;
+            $res['message'] = 'Simpan berhasil';
+        }
+
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($res));
+
+    }
+
 }
 
 /* End of file T_payment.php */

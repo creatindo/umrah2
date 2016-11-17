@@ -30,13 +30,16 @@ class T_document_model extends MY_Model
         $dataorder[$i++] = 'document_id';
         $dataorder[$i++] = 'customer_id';
         $dataorder[$i++] = 'quantity';
-        if(!empty($this->input->post('document_id'))){
+        if(!empty($this->input->post('document_id')))
+        {
             $where['document_id'] = $this->input->post('document_id');
         }
-        if(!empty($this->input->post('customer_id'))){
+        if(!empty($this->input->post('customer_id')))
+        {
             $where['customer_id'] = $this->input->post('customer_id');
         }
-        if(!empty($this->input->post('quantity'))){
+        if(!empty($this->input->post('quantity')))
+        {
             $where['LOWER(quantity) LIKE'] = '%'.strtolower($this->input->post('quantity')).'%';
         }
 
